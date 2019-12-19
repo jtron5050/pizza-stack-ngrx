@@ -7,10 +7,11 @@ import * as fromTickets from './reducers';
 import { TicketStackEffects } from './effects/ticket-stack.effects';
 import { TicketContainerComponent } from './containers/ticket-container.component';
 import { TicketStackComponent } from './components/ticket-stack/ticket-stack.component';
+import { TicketPreviewComponent } from './components/ticket-preview/ticket-preview.component';
 
 
 @NgModule({
-  declarations: [TicketContainerComponent, TicketStackComponent],
+  declarations: [TicketContainerComponent, TicketStackComponent, TicketPreviewComponent],
   exports:[
     TicketContainerComponent
   ],

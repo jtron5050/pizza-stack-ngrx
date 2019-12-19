@@ -4,12 +4,5 @@ export interface Ticket {
     date: string;
     type: string;
     customerId: string;
-    size: Size;
-}
-
-export enum Size {
-    S, 
-    M, 
-    L, 
-    XL
+    size: string;
 }

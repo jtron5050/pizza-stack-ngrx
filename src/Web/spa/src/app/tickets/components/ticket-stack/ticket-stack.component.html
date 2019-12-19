@@ -1,4 +1,6 @@
-<p>ticket-stack works!</p>
-<ul>
-    <li *ngFor="let ticket of tickets">{{ticket.id}}</li>
+
+<ul class="ticket-stack">
+    <li *ngFor="let ticket of tickets">
+        <app-ticket-preview [ticket]="ticket"></app-ticket-preview>
+    </li>
 </ul>
