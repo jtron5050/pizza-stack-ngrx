@@ -1,15 +1,24 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { TicketStackActions } from "../actions";
-import { switchMap } from "rxjs/operators";
+import { TicketStackActions, TicketApiActions } from "../actions";
+import { switchMap, catchError, map, tap } from "rxjs/operators";
+import { TicketService } from 'src/app/core/ticket.service';
+import { Ticket } from '../ticket.model';
+import { of } from 'rxjs';
+
 @Injectable()
 export class TicketStackEffects {
-    loadCollection$ = createEffect(() => this.actions$.pipe(
-        ofType(TicketStackActions.loadCollection),
-        switchMap(() => {
-            CollectionApiActions.loadTicketsSuccess()
-        })
-    ));
+    constructor(private actions$: Actions, private ticketService: TicketService) { }
 
-    constructor(private actions$: Actions) {}
+    loadCollection$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(TicketStackActions.loadTickets),
+            switchMap(() =>
+                this.ticketService.getTickets().pipe(
+                    map((tickets: Ticket[]) => TicketApiActions.loadTicketsSuccess({ tickets })),
+                    catchError(error => of(TicketApiActions.loadTicketsFailure({ error })))
+                )
+            )
+        )
+    });
 }

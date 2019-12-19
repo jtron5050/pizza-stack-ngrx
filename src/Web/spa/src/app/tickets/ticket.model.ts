@@ -1,7 +1,7 @@
 
 export interface Ticket {
     id: string;
-    date: Date;
+    date: string;
     type: string;
     customerId: string;
     size: Size;

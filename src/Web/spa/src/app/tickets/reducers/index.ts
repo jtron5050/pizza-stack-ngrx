@@ -1,14 +1,36 @@
-import * as fromTicket from './tickets.reducer';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, combineReducers, Action } from '@ngrx/store';
 
-export const ticketFeatureKey = 'ticket';
+import * as fromTickets from './tickets.reducer';
 
-export interface State {
-    [ticketFeatureKey]: fromTicket.State;
+export const ticketFeatureKey = 'tickets';
+
+export interface TicketsState {
+    [fromTickets.ticketsFeatureKey]: fromTickets.State
 }
 
-export const reducer = fromTicket.reducer;
+export interface State {
+    [ticketFeatureKey]: TicketsState;
+}
 
-export const selectTicketState = createFeatureSelector<fromTicket.State>('tickets');
 
-export const selectTicketIds = createSelector(selectTicketState, fromTicket.selectTicketIds);
+/** Provide reducer in AoT-compilation happy way */
+export function reducers(state: TicketsState | undefined, action: Action) {
+    return combineReducers({
+      [fromTickets.ticketsFeatureKey]: fromTickets.reducer,
+    })(state, action);
+  }
+
+export const selectTicketState = createFeatureSelector<State, TicketsState>(ticketFeatureKey);
+
+export const selectTicketEntitiesState = createSelector(
+    selectTicketState,
+    state => state.tickets
+);
+
+export const {
+    selectIds: selectTicketIds,
+    selectEntities: selectTicketEntities,
+    selectAll: selectAllTickets,
+    selectTotal: selectTicketTotal
+} = fromTickets.adapter.getSelectors(selectTicketEntitiesState);
+

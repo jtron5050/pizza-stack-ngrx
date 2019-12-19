@@ -1,7 +1,9 @@
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
-import { createReducer } from "@ngrx/store";
+import { createReducer, on, Action } from "@ngrx/store";
 import { Ticket } from '../ticket.model';
+import { TicketApiActions } from '../actions';
 
+export const ticketsFeatureKey = 'tickets';
 
 export interface State extends EntityState<Ticket> {
     selectedTicketId: string | null;
@@ -24,18 +26,14 @@ export const initialState = adapter.getInitialState({
     selectedTicketId: null
 });
 
-export const reducer = createReducer(initialState);
+const ticketReducer = createReducer(
+    initialState,
+    on(TicketApiActions.loadTicketsSuccess,
+        (state, { tickets }) => adapter.addMany(tickets, state))
+);
 
-export const getSelectedUserId = (state: State) => state.selectedTicketId;
+export function reducer(state: State, action: Action) {
+    return ticketReducer(state, action);
+}
 
-const {
-    selectIds,
-    selectEntities,
-    selectAll,
-    selectTotal
-} = adapter.getSelectors();
-
-export const selectTicketIds = selectIds;
-export const selectTicketEntities = selectEntities;
-export const selectAllTickets = selectAll;
-export const selectTicketTotal = selectTotal;
+export const getSelectedTicketId = (state: State) => state.selectedTicketId;

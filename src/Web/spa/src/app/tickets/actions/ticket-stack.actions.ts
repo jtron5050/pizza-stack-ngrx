@@ -1,3 +1,3 @@
 import { createAction } from "@ngrx/store";
 
-export const loadCollection = createAction('[Ticket Stack] Load Collection');
+export const loadTickets = createAction('[Ticket Stack] Load Tickets');

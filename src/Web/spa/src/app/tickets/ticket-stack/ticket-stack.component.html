@@ -1,2 +1,4 @@
 <p>ticket-stack works!</p>
-<p>tickets: {{tickets$ | async}}</p>
+<ul>
+    <li *ngFor="let ticket of tickets$ | async">{{ticket.id}}</li>
+</ul>
