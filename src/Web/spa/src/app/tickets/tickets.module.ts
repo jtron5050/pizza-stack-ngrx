@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TicketStackComponent } from './ticket-stack/ticket-stack.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromTickets from './reducers';
 import { EffectsModule } from '@ngrx/effects';
+
+import * as fromTickets from './reducers';
 import { TicketStackEffects } from './effects/ticket-stack.effects';
+import { TicketContainerComponent } from './containers/ticket-container.component';
+import { TicketStackComponent } from './components/ticket-stack/ticket-stack.component';
 
 
 @NgModule({
-  declarations: [TicketStackComponent],
+  declarations: [TicketContainerComponent, TicketStackComponent],
   exports:[
-    TicketStackComponent
+    TicketContainerComponent
   ],
   imports: [
     CommonModule,
