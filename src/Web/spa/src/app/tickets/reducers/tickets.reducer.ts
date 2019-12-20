@@ -1,7 +1,7 @@
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
 import { createReducer, on, Action } from "@ngrx/store";
 import { Ticket } from '../ticket.model';
-import { TicketApiActions } from '../actions';
+import { TicketApiActions, TicketHubActions } from '../actions';
 
 export const ticketsFeatureKey = 'tickets';
 
@@ -14,7 +14,9 @@ export function selectTicketId(ticket: Ticket): string {
 }
 
 export function sortByDate(a: Ticket, b:Ticket): number {
-    return a.date === b.date ? 0 : a.date > b.date ? 1 : -1;
+    let aDate = new Date(a.date);
+    let bDate = new Date(b.date);
+    return aDate === bDate ? 0 : aDate > bDate ? 1 : -1;
 }
 
 export const adapter = createEntityAdapter<Ticket>({
@@ -29,7 +31,8 @@ export const initialState = adapter.getInitialState({
 const ticketReducer = createReducer(
     initialState,
     on(TicketApiActions.loadTicketsSuccess,
-        (state, { tickets }) => adapter.addMany(tickets, state))
+        (state, { tickets }) => adapter.addMany(tickets, state)),
+    on(TicketHubActions.ticketAdded, (state, { ticket }) => { console.log(ticket); return adapter.addOne(ticket, state);})
 );
 
 export function reducer(state: State, action: Action) {
