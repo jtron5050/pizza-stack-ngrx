@@ -24,8 +24,9 @@ namespace Tickets.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Ticket> Get()
+        public async Task<IEnumerable<Ticket>> Get()
         {
+            await Task.Delay(1000);
             return _ticketsRepository.GetAll();
         }
 

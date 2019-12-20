@@ -10,9 +10,7 @@ import { TicketHubActions, TicketStackActions } from "../tickets/actions";
 export class TicketHubService {
     private hubConnection: HubConnection;
 
-    constructor(private store: Store<State>) {
-        console.log(store);
-    }
+    constructor(private store: Store<State>) { }
 
     async initialize() {
         this.hubConnection = new HubConnectionBuilder()
@@ -21,29 +19,20 @@ export class TicketHubService {
             .build();
 
         this.hubConnection.on('addTicket', (params) => this.handleAddTicket(params));
-        
-        this.hubConnection.onreconnecting(() => {
-            console.log('disconnected');
-        });
-        
-        this.hubConnection.onreconnected(() => {
-            console.log('reconnected');
-            this.store.dispatch(TicketStackActions.loadTickets());
-        });
-        
+
+        this.hubConnection.onreconnecting(() => { });
+
+        this.hubConnection.onreconnected(() => this.store.dispatch(TicketStackActions.loadTickets()));
+
         try {
             await this.hubConnection.start();
-            console.log('connected');
         }
-        catch(err) {
+        catch (err) {
             console.log(err);
         }
     }
 
     private handleAddTicket(params: any) {
-        console.log('adding ticket...', params);
-        console.log(this.store);
         this.store.dispatch(TicketHubActions.ticketAdded({ ticket: params }));
-        console.log('added...')
     }
 }

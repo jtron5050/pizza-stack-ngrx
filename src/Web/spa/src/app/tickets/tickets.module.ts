@@ -8,10 +8,11 @@ import { TicketStackEffects } from './effects/ticket-stack.effects';
 import { TicketContainerComponent } from './containers/ticket-container.component';
 import { TicketStackComponent } from './components/ticket-stack/ticket-stack.component';
 import { TicketPreviewComponent } from './components/ticket-preview/ticket-preview.component';
+import { TicketCountIconComponent } from './components/ticket-count-icon/ticket-count-icon.component';
 
 
 @NgModule({
-  declarations: [TicketContainerComponent, TicketStackComponent, TicketPreviewComponent],
+  declarations: [TicketContainerComponent, TicketStackComponent, TicketPreviewComponent, TicketCountIconComponent],
   exports:[
     TicketContainerComponent
   ],

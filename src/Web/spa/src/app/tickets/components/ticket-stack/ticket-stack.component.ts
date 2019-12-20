@@ -7,13 +7,10 @@ import { Ticket } from "../../ticket.model";
   templateUrl: './ticket-stack.component.html',
   styleUrls: ['./ticket-stack.component.css']
 })
-export class TicketStackComponent implements OnInit {
+export class TicketStackComponent {
   @Input() tickets: Ticket[];
+  @Input() count: number | null;
+  @Input() loading: boolean;
 
-  constructor() { 
-
-  }
-  
-  ngOnInit() {
-  }
+  constructor() { }
 }

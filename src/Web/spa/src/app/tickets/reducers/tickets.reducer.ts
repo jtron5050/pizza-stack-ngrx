@@ -1,11 +1,12 @@
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
 import { createReducer, on, Action } from "@ngrx/store";
 import { Ticket } from '../ticket.model';
-import { TicketApiActions, TicketHubActions } from '../actions';
+import { TicketApiActions, TicketHubActions, TicketStackActions } from '../actions';
 
 export const ticketsFeatureKey = 'tickets';
 
 export interface State extends EntityState<Ticket> {
+    loading: boolean;
     selectedTicketId: string | null;
 }
 
@@ -25,18 +26,19 @@ export const adapter = createEntityAdapter<Ticket>({
 });
 
 export const initialState = adapter.getInitialState({
+    loading: true,
     selectedTicketId: null
 });
 
 const ticketReducer = createReducer(
     initialState,
+    on(TicketStackActions.loadTickets,
+        state => ({ ...state, loading: true })),
     on(TicketApiActions.loadTicketsSuccess,
-        (state, { tickets }) => adapter.addMany(tickets, state)),
+        (state, { tickets }) => adapter.addMany(tickets, {...state, loading: false })),
     on(TicketHubActions.ticketAdded, (state, { ticket }) => { console.log(ticket); return adapter.addOne(ticket, state);})
 );
 
 export function reducer(state: State, action: Action) {
     return ticketReducer(state, action);
 }
-
-export const getSelectedTicketId = (state: State) => state.selectedTicketId;

@@ -34,3 +34,7 @@ export const {
     selectTotal: selectTicketTotal
 } = fromTickets.adapter.getSelectors(selectTicketEntitiesState);
 
+export const selectLoading = createSelector(
+    selectTicketEntitiesState,
+    state => state.loading
+)
