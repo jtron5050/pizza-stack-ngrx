@@ -9,4 +9,7 @@ import { Ticket } from '../../ticket.model';
 export class TicketPreviewComponent {
   @Input() ticket: Ticket;
 
+  select(id) {
+    
+  }
 }

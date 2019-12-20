@@ -1,6 +1,5 @@
 
-<ul class="ticket-stack">
-    <li *ngFor="let ticket of tickets">
-        <app-ticket-preview [ticket]="ticket"></app-ticket-preview>
-    </li>
-</ul>
+<div class="ticket-stack">   
+        <app-ticket-preview *ngFor="let ticket of tickets" [ticket]="ticket">    
+        </app-ticket-preview>
+</div>

@@ -3,6 +3,16 @@
     grid-template-columns: 60px auto 30px;
     grid-template-rows: 30px 30px;
     grid-gap: 5px 5px;
+    padding: 4px;
+    border-bottom: 1px solid black;
+}
+
+.ticket-preview:hover {
+    background-color: lightcyan;
+}
+
+:host:last-child .ticket-preview {
+    border-bottom: none;
 }
 
 .ticket-number {
