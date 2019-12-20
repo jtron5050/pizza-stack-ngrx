@@ -4,11 +4,17 @@
     width: 400px;
     list-style: none;
     padding: 0;
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
     background-color: white;
+    overflow: hidden;
 }
 
 .ticket-stack > header {
     padding: 12px 10px;
+}
+
+.ticket-stack > footer {
+    padding: 12px 10px;
+    background-color: hsl(210, 9%, 96%);
 }
