@@ -4,6 +4,11 @@
     width: 400px;
     list-style: none;
     padding: 0;
-    border: 1px solid black;
-    border-radius: 2px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+    background-color: white;
+}
+
+.ticket-stack > header {
+    padding: 12px 10px;
 }

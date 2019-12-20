@@ -1,25 +1,21 @@
+
 .ticket-preview {
     display: grid;
     grid-template-columns: 60px auto 30px;
     grid-template-rows: 30px 30px;
     grid-gap: 5px 5px;
-    padding: 4px;
-    border-bottom: 1px solid black;
+    padding: 12px 10px;
 }
 
 .ticket-preview:hover {
     background-color: lightcyan;
 }
 
-:host:last-child .ticket-preview {
-    border-bottom: none;
-}
-
 .ticket-number {
     grid-column: 1;
     grid-row: 1 / span 2;
     justify-content: center;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .ordered {
