@@ -9,7 +9,7 @@
     overflow: hidden;
     min-height: 300px;
     width: 600px;
-    border-top: 6px solid tomato;
+    border-top: 4px solid #e95d51;
 }
 
 .ticket-stack > .ticket-stack-header {
@@ -36,5 +36,5 @@
 
 .ticket-stack > .ticket-stack-footer {
     padding: 12px 20px;
-    background-color: hsl(24, 6%, 82%);
+    background-color: #e5e4e4;
 }

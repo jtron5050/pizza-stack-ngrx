@@ -1,0 +1,4 @@
+.ticket-container {
+    display: grid;
+    justify-content: left;
+}

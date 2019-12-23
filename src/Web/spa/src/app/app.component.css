@@ -6,10 +6,12 @@
 
 header {
     grid-row: header;
-    background-color: rgb(228, 165, 135);
+    background-color: #e95d51;
+    box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.3);
+    color:white;    
 }
 
 section {
     grid-row: main;
-    justify-self: center;
+    padding: 12px;
 }

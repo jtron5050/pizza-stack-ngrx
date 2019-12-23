@@ -3,13 +3,16 @@
         <h3>Tickets</h3>
         <app-ticket-count-icon [count]="count" [loading]="loading"></app-ticket-count-icon>
     </header>
+    
     <section class="ticket-stack-items" *ngIf="!loading">
         <app-ticket-preview *ngFor="let ticket of tickets" [ticket]="ticket">
         </app-ticket-preview>
     </section>
+
     <section *ngIf="loading" class="ticket-stack-loading">
         <span>Loading...</span>
     </section>
+
     <footer class="ticket-stack-footer">
         <small>Footer</small>
     </footer>
