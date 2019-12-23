@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap-reboot.min.css';
+@import '~bootstrap';
 
 body {
     background-color: hsl(24, 20%, 95%);

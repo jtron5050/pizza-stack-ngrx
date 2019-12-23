@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SignalR;
 using Tickets.API.Controllers;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Tickets.API
 {
@@ -23,7 +25,9 @@ namespace Tickets.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<TicketsRepository>();
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options => {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+            });
             services.AddSignalR();
         }
 

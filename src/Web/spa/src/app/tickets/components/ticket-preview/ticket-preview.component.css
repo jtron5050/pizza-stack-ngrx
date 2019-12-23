@@ -1,7 +1,7 @@
 
 .ticket-preview {
     display: grid;
-    grid-template-columns: 60px auto 30px;
+    grid-template-columns: 60px auto 40px 40px;
     grid-template-rows: auto auto;
     grid-gap: 5px 5px;
     padding: 12px 10px;
@@ -24,8 +24,18 @@
     grid-row: 1;
 }
 
+.customer {
+    grid-column: 2;
+    grid-row: 2;
+}
+
 .size {
     grid-column: 3;
     grid-row: 1 / span 2;
-    text-align: center;
+}
+
+.state {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    text-align: right;
 }

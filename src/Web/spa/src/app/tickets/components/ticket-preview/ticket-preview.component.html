@@ -6,8 +6,9 @@
         <div>{{ticket.id}}</div>
     </div>
     <div class="ordered">{{ticket.type}}</div>
-    <small class="customer">Customer Id: {{ticket.customerId}}</small>
+    <small class="customer">Customer: {{ticket.customer.name | titlecase}}</small>
     <div class="size">
         {{ticket.size}}
     </div>
+    <div class="state">{{ticket.state | uppercase}}</div>
 </a>

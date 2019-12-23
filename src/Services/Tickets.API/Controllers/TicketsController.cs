@@ -63,7 +63,8 @@ namespace Tickets.API.Controllers
                 Date = DateTime.Now.AddHours(-index),
                 Type = Types[rng.Next(Types.Length)],
                 Size = Sizes[rng.Next(Sizes.Length)],
-                CustomerId = index.ToString()
+                Customer = new Customer { Id = index.ToString(), Name = $"Jones {index.ToString()}", Address = $"{index.ToString()} No Way" },
+                State = TicketState.New
             });
 
             _tickets = new List<Ticket>(tickets);
