@@ -1,11 +1,15 @@
 .container {
     display: grid;
-    justify-content: center;
-    grid-template-columns: [nav] 300px, auto;
-    grid-template-rows: [header] auto [main] auto;
+    grid-gap: 10px;
+    grid-template-rows: [header] 75px [main] auto;
 }
 
 header {
     grid-row: header;
-    
+    background-color: rgb(228, 165, 135);
+}
+
+section {
+    grid-row: main;
+    justify-self: center;
 }

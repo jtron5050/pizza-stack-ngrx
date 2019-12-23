@@ -14,7 +14,7 @@ import { TicketCountIconComponent } from './components/ticket-count-icon/ticket-
 @NgModule({
   declarations: [TicketContainerComponent, TicketStackComponent, TicketPreviewComponent, TicketCountIconComponent],
   exports:[
-    TicketContainerComponent
+    TicketContainerComponent,  TicketCountIconComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,9 @@
 <div class="container">
-<header><h1>Hello</h1></header>
+<header>
+    <nav>
+        <app-ticket-count-icon [count]="ticketCount$ | async" [loading]="loading$ |async"></app-ticket-count-icon>
+    </nav>
+</header>
 <section>
     <app-ticket-container></app-ticket-container>
 </section>
