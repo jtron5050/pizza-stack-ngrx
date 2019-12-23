@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from 'rxjs';
-import { Ticket } from '../ticket.model';
-import { State, selectAllTickets, selectTicketTotal, selectLoading } from '../reducers';
 import { Store, select } from '@ngrx/store';
 
+import { Ticket } from '../ticket.model';
+import { State, selectAllTickets, selectTicketTotal, selectLoading } from '../reducers';
 import { loadTickets } from '../actions/ticket-stack.actions';
 
 @Component({

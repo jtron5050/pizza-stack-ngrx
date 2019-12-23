@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector, combineReducers, Action } from '@ngrx/store';
 
+import * as fromRoot from '../../reducers'
 import * as fromTickets from './tickets.reducer';
 
 export const ticketFeatureKey = 'tickets';
@@ -8,7 +9,7 @@ export interface TicketsState {
     [fromTickets.ticketsFeatureKey]: fromTickets.State
 }
 
-export interface State {
+export interface State extends fromRoot.State {
     [ticketFeatureKey]: TicketsState;
 }
 

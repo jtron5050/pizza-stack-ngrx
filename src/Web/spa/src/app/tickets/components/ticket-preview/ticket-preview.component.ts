@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Ticket } from '../../ticket.model';
 
 @Component({
@@ -8,8 +8,4 @@ import { Ticket } from '../../ticket.model';
 })
 export class TicketPreviewComponent {
   @Input() ticket: Ticket;
-
-  select(id) {
-    
-  }
 }
