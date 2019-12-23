@@ -1,16 +1,16 @@
 <div class="ticket-stack">
-    <header>
+    <header class="ticket-stack-header">
         <h3>Tickets</h3>
-        <app-ticket-count-icon [count]="count"></app-ticket-count-icon>
+        <app-ticket-count-icon [count]="count" [loading]="loading"></app-ticket-count-icon>
     </header>
-    <section class="stack-items">
+    <section class="ticket-stack-items" *ngIf="!loading">
         <app-ticket-preview *ngFor="let ticket of tickets" [ticket]="ticket">
         </app-ticket-preview>
     </section>
-    <section *ngIf="loading" class="loading">
-        Loading...
+    <section *ngIf="loading" class="ticket-stack-loading">
+        <span>Loading...</span>
     </section>
-    <footer>
-        <small>information</small>
+    <footer class="ticket-stack-footer">
+        <small>Footer</small>
     </footer>
 </div>

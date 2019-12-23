@@ -7,6 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TicketCountIconComponent {
   @Input() count: number | null;
-
+  @Input() loading: boolean;
   constructor() { }
 }

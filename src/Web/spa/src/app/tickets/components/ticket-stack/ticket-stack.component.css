@@ -12,21 +12,29 @@
     border-top: 6px solid tomato;
 }
 
-.ticket-stack > header {
+.ticket-stack > .ticket-stack-header {
+    padding: 12px 20px 0 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.ticket-stack > .ticket-stack-items,
+.ticket-stack > .ticket-stack-loading {
     padding: 12px 20px;
-}
-
-.ticket-stack > header > .bar {
-    height: 6px;
-    content: ' ';
-    background-color: tomato;
-}
-
-.ticket-stack > section {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    justify-content: center;
+    
 }
 
-.ticket-stack > footer {
+.ticket-stack > .ticket-stack-loading {
+    text-align: center;
+}
+
+
+.ticket-stack > .ticket-stack-footer {
     padding: 12px 20px;
     background-color: hsl(24, 6%, 82%);
 }
