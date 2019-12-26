@@ -2,7 +2,7 @@
 .ticket-preview {
     display: grid;
     grid-template-columns: 60px auto 40px 40px;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
     grid-gap: 5px 5px;
     padding: 12px 20px;
     border-radius: 4px;
@@ -16,7 +16,7 @@
 
 .ticket-number {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     justify-content: center;
     /* text-align: center; */
 }
@@ -33,11 +33,11 @@
 
 .size {
     grid-column: 3;
-    grid-row: 1 / span 2;
+    grid-row: 1;
 }
 
 .state {
     grid-column: 4;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     text-align: right;
 }

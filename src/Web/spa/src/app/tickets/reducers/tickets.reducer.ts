@@ -17,7 +17,7 @@ export function selectTicketId(ticket: Ticket): string {
 export function sortByDate(a: Ticket, b:Ticket): number {
     let aDate = new Date(a.date);
     let bDate = new Date(b.date);
-    return aDate === bDate ? 0 : aDate > bDate ? 1 : -1;
+    return aDate === bDate ? 0 : aDate > bDate ? -1 : 1;
 }
 
 export const adapter = createEntityAdapter<Ticket>({
@@ -35,7 +35,7 @@ const ticketReducer = createReducer(
     on(TicketStackActions.loadTickets,
         state => ({ ...state, loading: true })),
     on(TicketApiActions.loadTicketsSuccess,
-        (state, { tickets }) => adapter.addMany(tickets, {...state, loading: false })),
+        (state, { tickets }) => adapter.addAll(tickets, {...state, loading: false })),
     on(TicketHubActions.ticketAdded, (state, { ticket }) => { console.log(ticket); return adapter.addOne(ticket, state);})
 );
 

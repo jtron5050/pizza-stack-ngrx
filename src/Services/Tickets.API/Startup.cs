@@ -25,10 +25,14 @@ namespace Tickets.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<TicketsRepository>();
-            services.AddControllers().AddJsonOptions(options => {
+            services.AddControllers().AddJsonOptions(options => 
+            {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             });
-            services.AddSignalR();
+            services.AddSignalR().AddJsonProtocol(options => 
+            { 
+                options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

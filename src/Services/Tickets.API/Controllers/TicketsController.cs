@@ -16,7 +16,7 @@ namespace Tickets.API.Controllers
         private readonly TicketsRepository _ticketsRepository;
         private readonly IHubContext<TicketsHub> _ticketsHubContext;
 
-        public TicketsController(ILogger<TicketsController> logger, TicketsRepository ticketsRepository,IHubContext<TicketsHub> ticketsHubContext)
+        public TicketsController(ILogger<TicketsController> logger, TicketsRepository ticketsRepository, IHubContext<TicketsHub> ticketsHubContext)
         {
             _logger = logger;
             _ticketsRepository = ticketsRepository;
@@ -33,15 +33,25 @@ namespace Tickets.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Ticket ticket)
         {
+            ticket.State = TicketState.New;
             _ticketsRepository.Add(ticket);
             await _ticketsHubContext.Clients.All.SendAsync("addTicket", ticket);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(string id, [FromBody] Ticket ticket)
+        {
+            var t = _ticketsRepository.GetById(id);
+            _ticketsRepository.Update(id, ticket);
+            await _ticketsHubContext.Clients.All.SendAsync("updateTicket", ticket);
             return Ok();
         }
     }
 
     public class TicketsRepository
-    {        
-        private readonly List<Ticket> _tickets;
+    {
+        private readonly Dictionary<string, Ticket> _tickets;
 
         private readonly string[] Sizes = new[]
        {
@@ -55,9 +65,9 @@ namespace Tickets.API.Controllers
         };
 
         public TicketsRepository(IHubContext<TicketsHub> ticketsHubContext)
-        {            
+        {
             var rng = new Random();
-            var tickets = Enumerable.Range(1, 3).Select(index => new Ticket
+            var tickets = Enumerable.Range(1, 3).Select(index => new KeyValuePair<string,Ticket>(index.ToString(), new Ticket
             {
                 Id = index.ToString(),
                 Date = DateTime.Now.AddHours(-index),
@@ -65,21 +75,32 @@ namespace Tickets.API.Controllers
                 Size = Sizes[rng.Next(Sizes.Length)],
                 Customer = new Customer { Id = index.ToString(), Name = $"Jones {index.ToString()}", Address = $"{index.ToString()} No Way" },
                 State = TicketState.New
-            });
+            }));
 
-            _tickets = new List<Ticket>(tickets);
+            _tickets = new Dictionary<string, Ticket>(tickets);
         }
 
         public IEnumerable<Ticket> GetAll()
         {
-            return _tickets.AsReadOnly();
+            return _tickets.Values.ToList().AsReadOnly();
+        }
+
+        public Ticket GetById(string id)
+        {
+            return _tickets[id];
         }
 
         public void Add(Ticket ticket)
         {
             ticket.Id = (_tickets.Count + 1).ToString();
-            _tickets.Add(ticket);
-            
+            _tickets.Add(ticket.Id, ticket);
+
+        }
+
+        public void Update(string id, Ticket ticket)
+        {
+            var original = _tickets[id];
+            original.State = ticket.State;
         }
     }
 }
