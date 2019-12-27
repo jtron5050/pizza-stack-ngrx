@@ -36,7 +36,8 @@ const ticketReducer = createReducer(
         state => ({ ...state, loading: true })),
     on(TicketApiActions.loadTicketsSuccess,
         (state, { tickets }) => adapter.addAll(tickets, {...state, loading: false })),
-    on(TicketHubActions.ticketAdded, (state, { ticket }) => { console.log(ticket); return adapter.addOne(ticket, state);})
+    on(TicketHubActions.ticketAdded, (state, { ticket }) => adapter.addOne(ticket, state)),
+    on(TicketHubActions.ticketUpdated, (state, { ticket }) => adapter.updateOne({id: ticket.id, changes: ticket}, state))
 );
 
 export function reducer(state: State, action: Action) {

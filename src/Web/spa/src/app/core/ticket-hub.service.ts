@@ -19,6 +19,7 @@ export class TicketHubService {
             .build();
 
         this.hubConnection.on('addTicket', (params) => this.handleAddTicket(params));
+        this.hubConnection.on('updateTicket', params => this.handleUpdateTicket(params));
 
         this.hubConnection.onreconnecting(() => { });
 
@@ -34,5 +35,9 @@ export class TicketHubService {
 
     private handleAddTicket(params: any) {
         this.store.dispatch(TicketHubActions.ticketAdded({ ticket: params }));
+    }
+
+    private handleUpdateTicket(params: any) {
+        this.store.dispatch(TicketHubActions.ticketUpdated({ ticket: params }));
     }
 }
